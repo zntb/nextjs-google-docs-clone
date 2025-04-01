@@ -14,6 +14,7 @@ import FontFamily from '@tiptap/extension-font-family';
 import TextStyle from '@tiptap/extension-text-style';
 import Highlight from '@tiptap/extension-highlight';
 import { Color } from '@tiptap/extension-color';
+import Link from '@tiptap/extension-link';
 import ImageResize from 'tiptap-extension-resize-image';
 
 import { useEditorStore } from '@/store/use-editor-store';
@@ -66,6 +67,11 @@ export const Editor = () => {
       TextStyle,
       Color,
       ImageResize,
+      Link.configure({
+        openOnClick: false,
+        autolink: true,
+        defaultProtocol: 'https',
+      }),
       Highlight.configure({ multicolor: true }),
       TaskItem.configure({
         nested: true,
