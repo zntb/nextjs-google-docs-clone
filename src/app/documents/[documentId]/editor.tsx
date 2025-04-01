@@ -15,6 +15,7 @@ import TextStyle from '@tiptap/extension-text-style';
 import Highlight from '@tiptap/extension-highlight';
 import { Color } from '@tiptap/extension-color';
 import Link from '@tiptap/extension-link';
+import TextAlign from '@tiptap/extension-text-align';
 import ImageResize from 'tiptap-extension-resize-image';
 
 import { useEditorStore } from '@/store/use-editor-store';
@@ -75,6 +76,9 @@ export const Editor = () => {
       Highlight.configure({ multicolor: true }),
       TaskItem.configure({
         nested: true,
+      }),
+      TextAlign.configure({
+        types: ['heading', 'paragraph'],
       }),
     ],
     content: `
