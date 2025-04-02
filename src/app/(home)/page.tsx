@@ -1,5 +1,5 @@
-import Link from 'next/link';
 import { Navbar } from './navbar';
+import { TemplatesGallery } from './templates-gallery';
 
 const Home = () => {
   return (
@@ -8,12 +8,7 @@ const Home = () => {
         <Navbar />
       </div>
       <div className='mt-16'>
-        <div className='mt-5 text-center'>
-          <span className='mr-2'>Go to</span>
-          <Link href='/documents/123' className='font-bold underline'>
-            Documents
-          </Link>
-        </div>
+        <TemplatesGallery />
       </div>
     </div>
   );
