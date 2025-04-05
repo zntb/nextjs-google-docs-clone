@@ -15,6 +15,8 @@ interface DocumentProps {
 export const Document = ({ preloadedDocument }: DocumentProps) => {
   const document = usePreloadedQuery(preloadedDocument);
 
+  if (!document) return null;
+
   return (
     <Room>
       <div className='min-h-screen bg-editor-bg'>
@@ -23,7 +25,7 @@ export const Document = ({ preloadedDocument }: DocumentProps) => {
           <Toolbar />
         </div>
         <div className='pt-[114px] print:pt-0'>
-          <Editor />
+          <Editor initialContent={document.initialContent} />
         </div>
       </div>
     </Room>
