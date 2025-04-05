@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,8 +24,23 @@ interface RemoveDialogProps {
 }
 
 export const RemoveDialog = ({ documentId, children }: RemoveDialogProps) => {
+  const router = useRouter();
   const remove = useMutation(api.documents.removeById);
   const [isRemoving, setIsRemoving] = useState(false);
+
+  const handleDelete = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setIsRemoving(true);
+    try {
+      await remove({ id: documentId });
+      toast.success('Document removed');
+      setTimeout(() => router.push('/'), 1000);
+    } catch {
+      toast.error('Something went wrong');
+    } finally {
+      setIsRemoving(false);
+    }
+  };
 
   return (
     <AlertDialog>
@@ -41,17 +57,7 @@ export const RemoveDialog = ({ documentId, children }: RemoveDialogProps) => {
           <AlertDialogCancel onClick={e => e.stopPropagation()}>
             Cancel
           </AlertDialogCancel>
-          <AlertDialogAction
-            disabled={isRemoving}
-            onClick={e => {
-              e.stopPropagation();
-              setIsRemoving(true);
-              remove({ id: documentId })
-                .catch(() => toast.error('Something went wrong'))
-                .then(() => toast.success('Document removed'))
-                .finally(() => setIsRemoving(false));
-            }}
-          >
+          <AlertDialogAction disabled={isRemoving} onClick={handleDelete}>
             Delete
           </AlertDialogAction>
         </AlertDialogFooter>

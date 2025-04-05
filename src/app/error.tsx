@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { AlertTriangleIcon } from 'lucide-react';
 import Link from 'next/link';
@@ -10,6 +11,18 @@ interface ErrorPageProps {
 }
 
 const ErrorPage = ({ error, reset }: ErrorPageProps) => {
+  const [showError, setShowError] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowError(true);
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (!showError) return null;
+
   return (
     <div className='flex flex-col items-center justify-center min-h-screen space-y-6'>
       <div className='text-center space-y-4'>
