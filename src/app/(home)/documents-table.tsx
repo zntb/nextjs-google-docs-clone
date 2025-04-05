@@ -3,9 +3,7 @@ import { Doc } from '../../../convex/_generated/dataModel';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
-  TableFooter,
   TableHead,
   TableHeader,
   TableRow,
